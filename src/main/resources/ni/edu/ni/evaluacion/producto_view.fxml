@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="ni.edu.ni.evaluacion.controller.ProductoController" prefWidth="900" prefHeight="700">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Buscar:"/>
+        <TextField fx:id="txtBuscar" promptText="Nombre o Código"/>
+        <ComboBox fx:id="cmbFiltroCategoria"/>
+        <CheckBox fx:id="chkExistencias" text="Solo con existencias"/>
+        <Button text="Buscar" onAction="#buscar"/>
+        <Button text="Limpiar Filtros" onAction="#limpiarFiltros"/>
+        <Button text="Recargar" onAction="#cargarDatos"/>
+    </HBox>
+    <Label fx:id="lblContador" style="-fx-font-weight: bold;"/>
+
+
+    <TableView fx:id="tablaProductos" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colCodigo" text="Código" prefWidth="100"/>
+            <TableColumn fx:id="colNombre" text="Nombre" prefWidth="250"/>
+            <TableColumn fx:id="colCategoria" text="Categoría" prefWidth="150"/>
+            <TableColumn fx:id="colPrecio" text="Precio C$" prefWidth="100"/>
+            <TableColumn fx:id="colStock" text="Stock" prefWidth="100"/>
+        </columns>
+    </TableView>
+</VBox>
