@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductoDAO {
-
-
+    
     public List<Producto> buscarProductos(String texto, String categoria, boolean soloExistencias) throws SQLException {
         List<Producto> lista = new ArrayList<>();
         StringBuilder sql = new StringBuilder("SELECT * FROM producto WHERE 1=1");
@@ -49,5 +48,27 @@ public class ProductoDAO {
             }
         }
         return lista;
+    }
+
+    public void insertar(Producto p) throws SQLException {
+        String sql = "INSERT INTO producto (codigo, nombre, categoria, precio, stock) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, p.getCodigo());
+            pstmt.setString(2, p.getNombre());
+            pstmt.setString(3, p.getCategoria());
+            pstmt.setBigDecimal(4, p.getPrecio());
+            pstmt.setInt(5, p.getStock());
+            pstmt.executeUpdate();
+        }
+    }
+
+    public int eliminar(int id) throws SQLException {
+        String sql = "DELETE FROM producto WHERE id_producto = ?";
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            return pstmt.executeUpdate(); 
+        }
     }
 }
